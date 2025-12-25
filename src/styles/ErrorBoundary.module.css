@@ -1,0 +1,104 @@
+/* ErrorBoundary.module.css */
+.errorBoundary {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #f8fafc;
+}
+
+.errorContent {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  max-width: 500px;
+  width: 100%;
+}
+
+.errorIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.errorTitle {
+  margin: 0 0 12px 0;
+  color: #1e293b;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.errorMessage {
+  margin: 0 0 24px 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.retryButton {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.retryButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.errorDetails {
+  margin-top: 24px;
+  text-align: left;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  background: #f8fafc;
+}
+
+.errorDetails summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.errorDetails summary:hover {
+  color: #667eea;
+}
+
+.errorStack {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .errorContent {
+    padding: 24px;
+    margin: 16px;
+  }
+
+  .errorTitle {
+    font-size: 20px;
+  }
+
+  .errorIcon {
+    font-size: 36px;
+  }
+}

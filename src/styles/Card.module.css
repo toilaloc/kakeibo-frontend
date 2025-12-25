@@ -1,0 +1,62 @@
+/* Card.module.css */
+.card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Padding variants */
+.none {
+  padding: 0;
+}
+
+.small {
+  padding: 12px;
+}
+
+.medium {
+  padding: 24px;
+}
+
+.large {
+  padding: 32px;
+}
+
+/* Shadow variants */
+.shadowNone {
+  boxShadow: none;
+}
+
+.shadowSmall {
+  boxShadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.shadowMedium {
+  boxShadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.shadowLarge {
+  boxShadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Border radius variants */
+.roundedNone {
+  borderRadius: 0;
+}
+
+.roundedSmall {
+  borderRadius: 4px;
+}
+
+.roundedMedium {
+  borderRadius: 8px;
+}
+
+.roundedLarge {
+  borderRadius: 12px;
+}
+
+/* Hover effects */
+.card:hover {
+  boxShadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}

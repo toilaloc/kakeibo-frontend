@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+    network_mode: host
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000
+      - PORT=3001

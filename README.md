@@ -1,6 +1,42 @@
-# Getting Started with Create React App
+# Kakeibo Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A ReactJS application with magic link authentication, containerized with Docker.
+
+## Features
+
+- Magic Link Login: Enter email to receive a login link via email
+- Single Page Application with React Router
+- Production build served via nginx
+
+## Getting Started
+
+### Prerequisites
+- Docker
+- Docker Compose
+- Backend API running on `http://localhost:3000` with endpoints:
+  - `POST /api/v1/magic_links/request_magic_link` (body: {email})
+  - `POST /api/v1/magic_links/verify` (body: {token}) returns {user: {email, ...}}
+
+### Running the Application
+
+1. Build and run the application:
+   ```bash
+   docker-compose up --build
+   ```
+
+2. Open your browser and go to `http://localhost:3001`
+
+3. Enter your email to receive a magic link
+
+4. Click the link in the email to log in
+
+## Development
+
+For development with hot reload, run:
+```bash
+npm start
+```
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Available Scripts
 
@@ -38,16 +74,6 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
 ### Analyzing the Bundle Size
 
