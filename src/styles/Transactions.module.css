@@ -95,17 +95,27 @@
 
 .mainGrid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 24px;
+  grid-template-columns: 380px 1fr;
+  gap: 20px;
+  align-items: start;
 }
 
 .formSection {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-width: 100%;
+  overflow: visible;
+  position: sticky;
+  top: 24px;
 }
 
-.formCard {
+.listSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.listCard {
   background: white;
   border-radius: 12px;
   padding: 24px;
@@ -113,71 +123,26 @@
   border: 1px solid #e2e8f0;
 }
 
-.formTitle {
-  margin: 0 0 20px 0;
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.listTitle {
+  margin: 0;
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
-.transactionForm {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.formRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-}
-
-.formLabel {
-  margin-bottom: 6px;
-  color: #374151;
+.transactionCount {
+  color: #64748b;
   font-size: 14px;
   font-weight: 500;
-}
-
-.formSelect {
-  padding: 12px 16px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-sizing: border-box;
-}
-
-.formSelect:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.formSelect.error {
-  border-color: #ef4444;
-}
-
-.errorText {
-  color: #ef4444;
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-.buttonGroup {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  margin-top: 8px;
 }
 
 .actionCard {
@@ -191,6 +156,390 @@
 
 .addButton {
   width: 100%;
+}
+
+.formCard {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.formCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 12px 12px 0 0;
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.titleIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  object-fit: contain;
+}
+
+.formTitle {
+  margin: 0;
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.transactionForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldLabel {
+  margin-bottom: 6px;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.required {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.formSelect {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: white;
+  color: #374151;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 32px;
+}
+
+.formSelect:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.formSelect.error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.selectArrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.amountWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currencySymbol {
+  position: absolute;
+  left: 10px;
+  color: #6b7280;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 1;
+}
+
+.amountInput {
+  width: 100%;
+  padding: 10px 12px 10px 32px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: white;
+  color: #374151;
+}
+
+.amountInput:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.amountInput.error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.dateInput {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: white;
+  color: #374151;
+  cursor: pointer;
+}
+
+.dateInput:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.dateInput.error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.noteTextarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: white;
+  color: #374151;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.noteTextarea:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.errorText {
+  color: #dc2626;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 4px;
+  line-height: 1.4;
+  display: block;
+  min-height: 14px;
+}
+
+.formActions {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cancelButton {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.submitButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submitButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.submitButton:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formCard {
+    padding: 24px;
+    margin: 0;
+    border-radius: 12px;
+    height: auto;
+  }
+
+  .formSection {
+    overflow: visible;
+  }
+
+  .formHeader {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .titleIcon {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .formTitle {
+    font-size: 18px;
+    justify-content: center;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .formActions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cancelButton,
+  .submitButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .formCard {
+    padding: 20px;
+  }
+
+  .formTitle {
+    font-size: 16px;
+  }
+
+  .formSelect,
+  .amountInput,
+  .dateInput,
+  .noteTextarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+.actionCard {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.actionCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.addButton {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.addButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.addButton:hover::before {
+  left: 100%;
+}
+
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
 }
 
 .listSection {
@@ -483,6 +832,7 @@
 @media (max-width: 768px) {
   .mainGrid {
     grid-template-columns: 1fr;
+    max-height: none;
   }
 
   .headerContent {
@@ -497,10 +847,6 @@
 
   .headerTitle {
     font-size: 24px;
-  }
-
-  .formRow {
-    grid-template-columns: 1fr;
   }
 
   .transactionHeader {
@@ -535,6 +881,10 @@
   .listCard,
   .statCard {
     padding: 16px;
+  }
+
+  .formCard {
+    max-height: none;
   }
 
   .headerTitle {

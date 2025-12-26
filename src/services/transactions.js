@@ -1,8 +1,9 @@
 import { API_BASE_URL, getAuthHeaders } from '../utils/constants';
 import { handleHttpError } from '../utils/httpErrors';
 
-export const getTransactions = async (token, page = 1, perPage = 10) => {
+export const getTransactions = async (token, userId, page = 1, perPage = 4) => {
   const params = new URLSearchParams({
+    user_id: userId.toString(),
     page: page.toString(),
     per_page: perPage.toString()
   });
@@ -22,11 +23,15 @@ export const getTransactions = async (token, page = 1, perPage = 10) => {
   // Return both transactions and pagination info
   return {
     transactions: Array.isArray(data.transactions) ? data.transactions : [],
-    pagination: data.pagination || {
-      current_page: 1,
-      total_pages: 1,
-      total_count: 0,
-      per_page: perPage
+    pagination: {
+      current_page: data.pagination?.current_page || data.transactions?.current_page || page,
+      total_pages: data.pagination?.total_pages || data.transactions?.total_pages || 1,
+      total_count: data.pagination?.total_count || data.transactions?.total_count || 0,
+      per_page: data.pagination?.per_page || data.transactions?.limit_value || perPage
+    },
+    totals: {
+      total_income: parseFloat(data.pagination?.total_income || data.total_income) || 0,
+      total_expense: parseFloat(data.pagination?.total_expense || data.total_expense) || 0
     }
   };
 };

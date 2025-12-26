@@ -3,30 +3,35 @@ import { getTransactions, createTransaction, updateTransaction, deleteTransactio
 
 export const useTransactions = (token, userId) => {
   const [transactions, setTransactions] = useState([]);
+  const [totals, setTotals] = useState({
+    total_income: 0,
+    total_expense: 0
+  });
   const [pagination, setPagination] = useState({
     current_page: 1,
     total_pages: 1,
     total_count: 0,
-    per_page: 10
+    per_page: 4
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchTransactions = useCallback(async (page = 1, perPage = 10) => {
-    if (!token) return;
+  const fetchTransactions = useCallback(async (page = 1, perPage = 4) => {
+    if (!token || !userId) return;
 
     try {
       setLoading(true);
       setError(null);
-      const data = await getTransactions(token, page, perPage);
+      const data = await getTransactions(token, userId, page, perPage);
       setTransactions(data.transactions);
       setPagination(data.pagination);
+      setTotals(data.totals);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  }, [token]);
+  }, [token, userId]);
 
   const addTransaction = useCallback(async (transactionData) => {
     try {
@@ -37,7 +42,7 @@ export const useTransactions = (token, userId) => {
       setError(err.message);
       throw err; // Re-throw for component handling
     }
-  }, [token, userId, fetchTransactions, pagination.current_page]);
+  }, [token, userId, fetchTransactions]);
 
   const editTransaction = useCallback(async (id, transactionData) => {
     try {
@@ -48,7 +53,7 @@ export const useTransactions = (token, userId) => {
       setError(err.message);
       throw err;
     }
-  }, [token, userId, fetchTransactions, pagination.current_page]);
+  }, [token, userId, fetchTransactions]);
 
   const removeTransaction = useCallback(async (id) => {
     try {
@@ -67,6 +72,7 @@ export const useTransactions = (token, userId) => {
 
   return {
     transactions,
+    totals,
     pagination,
     loading,
     error,

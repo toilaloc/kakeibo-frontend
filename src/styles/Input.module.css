@@ -29,35 +29,50 @@
 }
 
 .input:focus {
-  borderColor: #667eea;
-  boxShadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .input:hover:not(:focus) {
-  borderColor: #cbd5e1;
+  border-color: #cbd5e1;
 }
 
 .input:disabled {
-  backgroundColor: #f9fafb;
+  background-color: #f9fafb;
   color: #6b7280;
   cursor: not-allowed;
 }
 
 .input.error {
-  borderColor: #ef4444;
+  border-color: #ef4444;
+  background-color: #fef2f2;
 }
 
 .input.error:focus {
-  borderColor: #ef4444;
-  boxShadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 .errorMessage {
   display: block;
-  marginTop: 4px;
-  color: #ef4444;
-  fontSize: 14px;
-  fontWeight: 500;
+  margin-top: 4px;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  min-height: 16px; /* Prevent layout shift */
+  animation: errorFadeIn 0.2s ease-in-out;
+}
+
+@keyframes errorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Specific input types */
@@ -72,6 +87,6 @@
 @media (max-width: 480px) {
   .input {
     padding: 14px 16px;
-    fontSize: 16px; /* Prevent zoom on iOS */
+    font-size: 16px; /* Prevent zoom on iOS */
   }
 }

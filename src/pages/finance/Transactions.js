@@ -11,7 +11,7 @@ import Card from '../../components/Card';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import styles from '../../styles/Transactions.module.css';
 
-const TransactionForm = memo(({ onSubmit, onCancel, editingTransaction, categories }) => {
+const TransactionForm = memo(({ onSubmit, onCancel, editingTransaction, categories, formatCurrency }) => {
   const [formData, setFormData] = useState({
     categoryId: editingTransaction?.category_id || '',
     amount: editingTransaction?.amount || '',
@@ -75,24 +75,37 @@ const TransactionForm = memo(({ onSubmit, onCancel, editingTransaction, categori
     }
   };
 
+  const selectedCategory = categories.find(c => c.id == formData.categoryId);
+  const isIncome = selectedCategory && (selectedCategory.type === 0 || selectedCategory.type === '0' || selectedCategory.type === 'income');
   const isFormValid = formData.categoryId && formData.amount && formData.transactionDate &&
-                     !Object.values(errors).some(error => error);
+                     !Object.values(errors).some(error => error) &&
+                     parseFloat(formData.amount) > 0;
 
   return (
-    <Card className={styles.formCard}>
-      <h3 className={styles.formTitle}>
-        {editingTransaction ? '✏️ Edit Transaction' : 
-          <>
-            <img src="/nya-emoji/yossha-nya.gif" alt="Add" className={styles.buttonIcon} />
-            Add Transaction
-          </>
-        }
-      </h3>
+    <div className={styles.formCard}>
+      <div className={styles.formHeader}>
+        <h3 className={styles.formTitle}>
+          {editingTransaction ? (
+            <>
+              <img src="/nya-emoji/memo-nya.png" alt="Edit" className={styles.titleIcon} />
+              Edit Transaction
+            </>
+          ) : (
+            <>
+              <img src="/nya-emoji/yossha-nya.gif" alt="Add" className={styles.titleIcon} />
+              Add Transaction
+            </>
+          )}
+        </h3>
+      </div>
 
       <form onSubmit={handleSubmit} className={styles.transactionForm}>
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Category *</label>
+        {/* Category Selection */}
+        <div className={styles.fieldGroup}>
+          <label className={styles.fieldLabel}>
+            Category <span className={styles.required}>*</span>
+          </label>
+          <div className={styles.selectWrapper}>
             <select
               name="categoryId"
               value={formData.categoryId}
@@ -100,66 +113,94 @@ const TransactionForm = memo(({ onSubmit, onCancel, editingTransaction, categori
               onBlur={handleBlur}
               className={`${styles.formSelect} ${errors.categoryId ? styles.error : ''}`}
             >
-              <option value="">Select a category</option>
+              <option value="">Select category</option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>
-                  {category.icon} {category.name} ({category.type})
+                  {category.icon || '📁'} {category.name}
                 </option>
               ))}
             </select>
-            {errors.categoryId && <span className={styles.errorText}>{errors.categoryId}</span>}
+            <div className={styles.selectArrow}>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
           </div>
+          {errors.categoryId && <span className={styles.errorText}>{errors.categoryId}</span>}
+        </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Amount *</label>
-            <Input
-              type="text"
+        {/* Amount Input */}
+        <div className={styles.fieldGroup}>
+          <label className={styles.fieldLabel}>
+            Amount <span className={styles.required}>*</span>
+          </label>
+          <div className={styles.amountWrapper}>
+            <span className={styles.currencySymbol}>₫</span>
+            <input
+              type="number"
               name="amount"
               value={formData.amount}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="0.00"
-              error={errors.amount}
+              placeholder="0"
+              min="0"
+              step="0.01"
+              className={`${styles.amountInput} ${errors.amount ? styles.error : ''}`}
             />
           </div>
+          {errors.amount && <span className={styles.errorText}>{errors.amount}</span>}
         </div>
 
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Date *</label>
-            <Input
-              type="date"
-              name="transactionDate"
-              value={formData.transactionDate}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.transactionDate}
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Note</label>
-            <Input
-              type="text"
-              name="note"
-              value={formData.note}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="Optional note"
-            />
-          </div>
+        {/* Date Input */}
+        <div className={styles.fieldGroup}>
+          <label className={styles.fieldLabel}>
+            Date <span className={styles.required}>*</span>
+          </label>
+          <input
+            type="date"
+            name="transactionDate"
+            value={formData.transactionDate}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`${styles.dateInput} ${errors.transactionDate ? styles.error : ''}`}
+          />
+          {errors.transactionDate && <span className={styles.errorText}>{errors.transactionDate}</span>}
         </div>
 
-        <div className={styles.buttonGroup}>
-          <Button type="button" variant="secondary" onClick={onCancel}>
+        {/* Notes Input */}
+        <div className={styles.fieldGroup}>
+          <label className={styles.fieldLabel}>Notes</label>
+          <textarea
+            name="note"
+            value={formData.note}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Add a note..."
+            rows="2"
+            className={styles.noteTextarea}
+          />
+        </div>
+
+        {/* Action Buttons */}
+        <div className={styles.formActions}>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={onCancel}
+            className={styles.cancelButton}
+          >
             Cancel
           </Button>
-          <Button type="submit" disabled={!isFormValid}>
-            {editingTransaction ? 'Update' : 'Add'} Transaction
+          <Button
+            type="submit"
+            disabled={!isFormValid}
+            className={styles.submitButton}
+          >
+            {editingTransaction ? 'Update Transaction' : 'Add Transaction'}
           </Button>
         </div>
       </form>
-    </Card>
+    </div>
   );
 });
 
@@ -233,8 +274,8 @@ const TransactionCard = memo(({ transaction, categories, onEdit, onDelete, forma
 function Transactions() {
   const navigate = useNavigate();
   const { token, user } = useAuth();
-  const { transactions, pagination, loading, error, fetchTransactions, addTransaction, editTransaction, removeTransaction, clearError } = useTransactions(token, user?.id);
-  const { categories, fetchCategories } = useCategories(token);
+  const { transactions, totals, pagination, loading, error, fetchTransactions, addTransaction, editTransaction, removeTransaction, clearError } = useTransactions(token, user?.id);
+  const { categories, dropdownCategories, fetchCategories, fetchCategoriesForDropdown } = useCategories(token);
 
   const [showForm, setShowForm] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState(null);
@@ -250,7 +291,8 @@ function Transactions() {
   useEffect(() => {
     fetchTransactions();
     fetchCategories();
-  }, [fetchTransactions, fetchCategories]);
+    fetchCategoriesForDropdown();
+  }, [fetchTransactions, fetchCategories, fetchCategoriesForDropdown]);
 
   useEffect(() => {
     handleApiError(error, navigate);
@@ -301,13 +343,8 @@ function Transactions() {
     setShowForm(true);
   };
 
-  const totalIncome = transactions
-    .filter(t => t.category_type === 'income')
-    .reduce((sum, t) => sum + parseFloat(t.amount), 0);
-
-  const totalExpenses = transactions
-    .filter(t => t.category_type === 'expense')
-    .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+  const totalIncome = totals.total_income;
+  const totalExpenses = totals.total_expense;
 
   const positiveBalance = totalIncome > totalExpenses;
 
@@ -396,7 +433,8 @@ function Transactions() {
                 onSubmit={editingTransaction ? handleEditTransaction : handleAddTransaction}
                 onCancel={handleCancel}
                 editingTransaction={editingTransaction}
-                categories={categories}
+                categories={dropdownCategories}
+                formatCurrency={formatCurrency}
               />
             )}
           </div>

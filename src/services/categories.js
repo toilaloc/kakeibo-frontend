@@ -31,6 +31,23 @@ export const getCategories = async (token, page = 1, perPage = 10) => {
   };
 };
 
+export const getCategoriesForDropdown = async (token) => {
+  const response = await fetch(`${API_BASE_URL}/api/v1/dropdowns/categories`, {
+    method: 'GET',
+    headers: getAuthHeaders(token),
+  });
+
+  await handleHttpError(response);
+
+  const data = await response.json();
+  if (data.error === 'Unauthorized') {
+    throw new Error('Unauthorized');
+  }
+
+  // Return categories array directly for dropdown usage
+  return Array.isArray(data.categories) ? data.categories : [];
+};
+
 export const createCategory = async (token, categoryData) => {
   const response = await fetch(`${API_BASE_URL}/api/v1/categories`, {
     method: 'POST',
