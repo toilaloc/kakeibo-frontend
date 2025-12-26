@@ -347,6 +347,7 @@ function Transactions() {
   const totalExpenses = totals.total_expense;
 
   const positiveBalance = totalIncome > totalExpenses;
+  const balance = Math.abs(totalIncome - totalExpenses);
 
   if (loading && transactions.length === 0) {
     return (
@@ -382,8 +383,8 @@ function Transactions() {
             <div className={styles.statLabel}>Total Expenses</div>
           </Card>
           <Card className={styles.statCard}>
-            <div className={`${styles.statValue} ${positiveBalance ? styles.positive : styles.negative}`}>
-              {positiveBalance ? '+' : '-'}{formatCurrency(Math.abs(totalIncome - totalExpenses))}
+            <div className={`${styles.statValue} ${positiveBalance || balance === 0 ? styles.positive : styles.negative}`}>
+              {balance === 0 ? '' : (positiveBalance ? '+' : '-')}{formatCurrency(balance)}
             </div>
             <div className={styles.statLabel}>Balance</div>
           </Card>
@@ -451,7 +452,7 @@ function Transactions() {
               {transactions.length === 0 ? (
                 <div className={styles.emptyState}>
                   <div className={styles.emptyIcon}>
-                    <img src="/nya-emoji/yabai-nya.png" alt="No transactions" className={styles.emptyIconImage} />
+                    <img src="/nya-emoji/bow-nya.png" alt="No transactions" className={styles.emptyIconImage} />
                   </div>
                   <div className={styles.emptyTitle}>No transactions yet</div>
                   <div className={styles.emptyText}>

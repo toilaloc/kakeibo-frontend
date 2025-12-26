@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { sendMagicLink } from '../../services/auth';
 import { useAuth } from '../../contexts/AuthContext';
 import { UI_MESSAGES, VALIDATION_RULES } from '../../utils/constants';
@@ -102,6 +103,12 @@ function Login() {
 
         <div className={styles.footer}>
           <p>We'll send you a secure link to access your account</p>
+          <p>
+            Don't have an account?{' '}
+            <Link to="/signup" className={styles.signupLink}>
+              Sign up here
+            </Link>
+          </p>
         </div>
       </Card>
     </div>

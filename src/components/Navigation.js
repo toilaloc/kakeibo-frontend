@@ -60,7 +60,7 @@ const Navigation = () => {
         <div className={styles.navUser}>
           {user && (
             <div className={styles.userInfo}>
-              <span className={styles.userEmail}>{user.email}</span>
+              <span className={styles.userEmail}>{user.display_name}</span>
               <button
                 onClick={logout}
                 className={styles.logoutButton}

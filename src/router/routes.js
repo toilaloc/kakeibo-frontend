@@ -1,4 +1,4 @@
-import { Login, Unauthorized } from '../pages/auth';
+import { Login, Signup, Unauthorized } from '../pages/auth';
 import { Home } from '../pages/dashboard';
 import { Categories, Transactions } from '../pages/finance';
 import { Report } from '../pages/reports';
@@ -13,6 +13,11 @@ export const routes = [
   {
     path: '/login',
     element: <Login />,
+    protected: false,
+  },
+  {
+    path: '/signup',
+    element: <Signup />,
     protected: false,
   },
   {

@@ -34,3 +34,20 @@ export const verifyToken = async (token, email) => {
 
   return response.json();
 };
+
+export const signup = async (userData) => {
+  const response = await fetch(`${API_BASE_URL}/api/v1/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Failed to create account');
+  }
+
+  return response.json();
+};
