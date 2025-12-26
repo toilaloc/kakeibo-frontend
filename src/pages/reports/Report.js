@@ -276,7 +276,7 @@ function Report() {
 
       {!loading && !error && dashboardData.length === 0 && (
         <div className={styles.noData}>
-          <img src="/nya-emoji/shocked-nya.png" alt="No data" className={styles.noDataIcon} />
+          <img src="/nya-emoji/bow-nya.png" alt="No data" className={styles.noDataIcon} />
           <h3>No financial data available</h3>
           <p>Add some transactions to see your financial reports and insights.</p>
         </div>

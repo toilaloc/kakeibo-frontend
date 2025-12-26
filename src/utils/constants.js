@@ -17,6 +17,7 @@ export const UI_MESSAGES = {
   DELETING: 'Deleting...',
   CONFIRM_DELETE: 'Are you sure you want to delete this category?',
   MAGIC_LINK_SENT: 'Magic link sent! Check your email.',
+  SIGNUP_SUCCESS: 'Account created successfully! Redirecting to login...',
   CATEGORY_CREATED: 'Category created successfully!',
   CATEGORY_UPDATED: 'Category updated successfully!',
   CATEGORY_DELETED: 'Category deleted successfully!',
