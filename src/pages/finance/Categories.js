@@ -67,7 +67,7 @@ const RadioOption = memo(({ value, checked, onChange, disabled, children, classN
 
 function Categories() {
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const { logout, token } = useAuth();
   const {
     categories,
     pagination,
@@ -84,8 +84,12 @@ function Categories() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    handleApiError(error, navigate);
-  }, [error, navigate]);
+    if (error?.statusCode === 401 || error?.type === 'Unauthorized') {
+      logout();
+    } else {
+      handleApiError(error, navigate);
+    }
+  }, [error, navigate, logout]);
 
   const { values, errors, handleChange, handleBlur, validateForm, resetForm, setFieldValue } = useFormValidation({
     name: '',

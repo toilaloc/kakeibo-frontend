@@ -1,8 +1,9 @@
 import { useState, useCallback } from 'react';
-import { getCategories, createCategory, updateCategory, deleteCategory } from '../services/categories';
+import { getCategories, getCategoriesForDropdown, createCategory, updateCategory, deleteCategory } from '../services/categories';
 
 export const useCategories = (token) => {
   const [categories, setCategories] = useState([]);
+  const [dropdownCategories, setDropdownCategories] = useState([]);
   const [pagination, setPagination] = useState({
     current_page: 1,
     total_pages: 1,
@@ -25,6 +26,17 @@ export const useCategories = (token) => {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  }, [token]);
+
+  const fetchCategoriesForDropdown = useCallback(async () => {
+    if (!token) return;
+
+    try {
+      const data = await getCategoriesForDropdown(token);
+      setDropdownCategories(data);
+    } catch (err) {
+      setError(err.message);
     }
   }, [token]);
 
@@ -67,10 +79,12 @@ export const useCategories = (token) => {
 
   return {
     categories,
+    dropdownCategories,
     pagination,
     loading,
     error,
     fetchCategories,
+    fetchCategoriesForDropdown,
     addCategory,
     editCategory,
     removeCategory,

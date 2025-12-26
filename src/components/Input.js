@@ -12,6 +12,7 @@ const Input = ({
   required = false,
   disabled = false,
   className = '',
+  inputClassName = '',
   ...props
 }) => {
   const inputId = `input-${Math.random().toString(36).substr(2, 9)}`;
@@ -32,7 +33,7 @@ const Input = ({
         placeholder={placeholder}
         required={required}
         disabled={disabled}
-        className={`${styles.input} ${error ? styles.error : ''}`}
+        className={`${styles.input} ${inputClassName} ${error ? styles.error : ''}`}
         aria-invalid={error ? 'true' : 'false'}
         aria-describedby={error ? `${inputId}-error` : undefined}
         {...props}
@@ -56,6 +57,7 @@ Input.propTypes = {
   required: PropTypes.bool,
   disabled: PropTypes.bool,
   className: PropTypes.string,
+  inputClassName: PropTypes.string,
 };
 
 export default Input;

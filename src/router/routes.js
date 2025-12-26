@@ -1,6 +1,7 @@
 import { Login, Unauthorized } from '../pages/auth';
 import { Home } from '../pages/dashboard';
 import { Categories, Transactions } from '../pages/finance';
+import { Report } from '../pages/reports';
 import { NotFound, Forbidden, BadRequest, ServerError, UnprocessableEntity } from '../pages/errors';
 
 export const routes = [
@@ -22,6 +23,11 @@ export const routes = [
   {
     path: '/transactions',
     element: <Transactions />,
+    protected: true,
+  },
+  {
+    path: '/report',
+    element: <Report />,
     protected: true,
   },
   {

@@ -23,9 +23,13 @@ function Home() {
   }, [fetchTransactions, user?.id]);
 
   useEffect(() => {
-    handleApiError(categoriesError, navigate);
-    handleApiError(transactionsError, navigate);
-  }, [categoriesError, transactionsError, navigate]);
+    if (categoriesError?.status === 401 || transactionsError?.status === 401) {
+      logout();
+    } else {
+      handleApiError(categoriesError, navigate);
+      handleApiError(transactionsError, navigate);
+    }
+  }, [categoriesError, transactionsError, navigate, logout]);
 
   // Calculate some basic stats
   const incomeCategories = categories.filter(cat => cat.type === 'INCOME').length;
@@ -86,7 +90,7 @@ function Home() {
           </p>
         </Link>
 
-        <div className={styles.dashboardCard}>
+        <Link to="/report" className={styles.dashboardCard}>
           <div className={styles.cardIcon}>
             <img src="/nya-emoji/naruhodo-nya.gif" alt="Reports" className={styles.cardIconImage} />
           </div>
@@ -94,7 +98,7 @@ function Home() {
           <p className={styles.cardDescription}>
             Analyze your financial data with detailed reports and insights.
           </p>
-        </div>
+        </Link>
 
         <div className={styles.dashboardCard}>
           <div className={styles.cardIcon}>
