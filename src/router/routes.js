@@ -1,6 +1,6 @@
 import { Login, Signup, Unauthorized } from '../pages/auth';
 import { Home } from '../pages/dashboard';
-import { Categories, Transactions } from '../pages/finance';
+import { Categories, Transactions, Diaries } from '../pages/finance';
 import { Report } from '../pages/reports';
 import { NotFound, Forbidden, BadRequest, ServerError, UnprocessableEntity } from '../pages/errors';
 
@@ -28,6 +28,11 @@ export const routes = [
   {
     path: '/transactions',
     element: <Transactions />,
+    protected: true,
+  },
+  {
+    path: '/diaries',
+    element: <Diaries />,
     protected: true,
   },
   {

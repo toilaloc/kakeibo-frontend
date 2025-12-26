@@ -109,6 +109,26 @@ function Home() {
             Define your financial goals and track your progress towards achieving them.
           </p>
         </div>
+
+        <Link to="/diaries" className={styles.dashboardCard}>
+          <div className={styles.cardIcon}>
+            <img src="/nya-emoji/memo-nya.png" alt="Diary" className={styles.cardIconImage} />
+          </div>
+          <h3 className={styles.cardTitle}>Diary</h3>
+          <p className={styles.cardDescription}>
+            Reflect on your financial journey by maintaining a personal diary of your experiences.
+          </p>
+        </Link>
+
+        <div className={styles.dashboardCard}>
+          <div className={styles.cardIcon}>
+            <img src="/nya-emoji/naisho-nya.png" alt="Schedule" className={styles.cardIconImage} />
+          </div>
+          <h3 className={styles.cardTitle}>Schedule</h3>
+          <p className={styles.cardDescription}>
+            Plan your financial activities and reminders with the scheduling feature.
+          </p>
+        </div>
       </div>
 
       <div className={styles.actionsSection}>
