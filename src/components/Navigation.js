@@ -22,6 +22,11 @@ const Navigation = () => {
       path: '/transactions',
       label: 'Transactions',
       icon: '/nya-emoji/medetai-nya.gif'
+    },
+    {
+      path: '/diaries',
+      label: 'Diaries',
+      icon: '/nya-emoji/nyaan-nya.png'
     }
   ];
 
