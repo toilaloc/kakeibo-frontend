@@ -16,17 +16,17 @@ const Navigation = () => {
     {
       path: '/categories',
       label: 'Categories',
-      icon: '/nya-emoji/memo-nya.png'
+      icon: '/nya-emoji/think-nya.png'
     },
     {
       path: '/transactions',
       label: 'Transactions',
-      icon: '/nya-emoji/medetai-nya.gif'
+      icon: '/nya-emoji/gohan-nya.png'
     },
     {
       path: '/diaries',
       label: 'Diaries',
-      icon: '/nya-emoji/nyaan-nya.png'
+      icon: '/nya-emoji/memo-nya.png'
     }
   ];
 

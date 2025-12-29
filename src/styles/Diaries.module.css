@@ -1506,3 +1506,12 @@ textarea.formInput {
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
 }
+
+/* Nya icon for diary list items */
+.diaryListIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  margin-right: 10px;
+  border-radius: 6px;
+}

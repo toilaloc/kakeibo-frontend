@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose, children, title }) => {
   };
 
   return (
-    <div className={styles.modalBackdrop}>
+    <div className={styles.modalBackdrop} onClick={handleBackdropClick}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
           <h2 className={styles.modalTitle}>{title}</h2>

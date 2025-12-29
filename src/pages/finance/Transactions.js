@@ -6,7 +6,6 @@ import { useCategories } from '../../hooks/useCategories';
 import { UI_MESSAGES } from '../../utils/constants';
 import { handleApiError } from '../../utils/errorHandler';
 import Button from '../../components/Button';
-import Input from '../../components/Input';
 import Card from '../../components/Card';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import styles from '../../styles/Transactions.module.css';
@@ -75,8 +74,7 @@ const TransactionForm = memo(({ onSubmit, onCancel, editingTransaction, categori
     }
   };
 
-  const selectedCategory = categories.find(c => c.id == formData.categoryId);
-  const isIncome = selectedCategory && (selectedCategory.type === 0 || selectedCategory.type === '0' || selectedCategory.type === 'income');
+  
   const isFormValid = formData.categoryId && formData.amount && formData.transactionDate &&
                      !Object.values(errors).some(error => error) &&
                      parseFloat(formData.amount) > 0;
@@ -92,7 +90,7 @@ const TransactionForm = memo(({ onSubmit, onCancel, editingTransaction, categori
             </>
           ) : (
             <>
-              <img src="/nya-emoji/yossha-nya.gif" alt="Add" className={styles.titleIcon} />
+              <img src="/nya-emoji/lgtm-nya.gif" alt="Add" className={styles.titleIcon} />
               Add Transaction
             </>
           )}
@@ -364,7 +362,7 @@ function Transactions() {
         <div className={styles.headerCard}>
           <div className={styles.headerContent}>
             <div className={styles.headerIcon}>
-              <img src="/nya-emoji/medetai-nya.gif" alt="Transactions" className={styles.headerIconImage} />
+              <img src="/nya-emoji/gohan-nya.png" alt="Transactions" className={styles.headerIconImage} />
             </div>
             <div>
               <h1 className={styles.headerTitle}>Transactions</h1>
@@ -423,7 +421,7 @@ function Transactions() {
             {!showForm && (
               <Card className={styles.actionCard}>
                 <Button onClick={() => setShowForm(true)} className={styles.addButton}>
-                  <img src="/nya-emoji/yossha-nya.gif" alt="Add" className={styles.buttonIcon} />
+                  <img src="/nya-emoji/lgtm-nya.gif" alt="Add" className={styles.buttonIcon} />
                   Add Transaction
                 </Button>
               </Card>

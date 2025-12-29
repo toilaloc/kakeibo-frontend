@@ -16,7 +16,7 @@ function Signup() {
   const [currentStep, setCurrentStep] = useState(1);
   const { error, clearError } = useAuth();
 
-  const { values, errors, touched, handleChange, handleBlur, resetForm } = useFormValidation({
+  const { values, errors, touched, handleChange, handleBlur } = useFormValidation({
     display_name: '',
     first_name: '',
     last_name: '',
@@ -154,9 +154,7 @@ function Signup() {
     }
   };
 
-  const isFormValid = Object.keys(values).every(key =>
-    values[key] && !errors[key] && touched[key]
-  ) && values.password === values.password_confirmation;
+  
 
   return (
     <div className={styles.signupContainer}>

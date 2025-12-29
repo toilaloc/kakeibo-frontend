@@ -202,7 +202,7 @@ const Diaries = () => {
   const [editingDiary, setEditingDiary] = useState(null);
   const [viewingDiary, setViewingDiary] = useState(null);
   const [message, setMessage] = useState('');
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [viewMode] = useState('grid'); // 'grid' or 'list'
 
   useEffect(() => {
     if (!user) {
@@ -435,24 +435,6 @@ const Diaries = () => {
                   >
                     📝 Begin Your Journey
                   </Button>
-                      <div className={styles.emptyFeatures}>
-                        <div className={styles.emptyFeature}>
-                          <span>✏️</span>
-                          <span>Rich Text Editor</span>
-                        </div>
-                        <div className={styles.emptyFeature}>
-                          <span>🔍</span>
-                          <span>Easy Search</span>
-                        </div>
-                        <div className={styles.emptyFeature}>
-                          <span>📱</span>
-                          <span>Mobile Friendly</span>
-                        </div>
-                        <div className={styles.emptyFeature}>
-                          <span>🔒</span>
-                          <span>Private & Secure</span>
-                        </div>
-                      </div>
                     </div>
               </div>
             </Card>
@@ -465,7 +447,8 @@ const Diaries = () => {
               >
                 <div className={styles.diaryHeader}>
                   <div className={styles.diaryMeta}>
-                    <h3
+                      <img src="/nya-emoji/nyaan-nya.png" alt="nya" className={styles.diaryListIcon} />
+                      <h3
                       className={`${styles.diaryTitle} ${styles.clickableTitle}`}
                       onClick={() => handleView(diary)}
                       tabIndex={0}
@@ -516,8 +499,8 @@ const Diaries = () => {
                   </div>
                 </div>
                 <div className={styles.diaryContent}>
-                  {typeof (diary.content || diary.body) === 'string'
-                    ? <DiaryContent content={diary.content || diary.body} />
+                  {typeof diary.content === 'string'
+                    ? <DiaryContent content={diary.content} />
                     : <p className={styles.noContent}>Content not available (invalid format)</p>
                   }
                 </div>
