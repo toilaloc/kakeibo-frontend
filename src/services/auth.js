@@ -36,12 +36,17 @@ export const verifyToken = async (token, email) => {
 };
 
 export const signup = async (userData) => {
+  // Determine if userData is FormData or JSON
+  const isFormData = userData instanceof FormData;
+  
+  const headers = isFormData 
+    ? {} // Don't set Content-Type for FormData - browser will set it with boundary
+    : { 'Content-Type': 'application/json' };
+
   const response = await fetch(`${API_BASE_URL}/api/v1/signup`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userData),
+    headers,
+    body: isFormData ? userData : JSON.stringify(userData),
   });
 
   if (!response.ok) {

@@ -13,7 +13,17 @@ export const useDashboard = (token) => {
       setLoading(true);
       setError(null);
       const data = await getKakeiboDashboard(token, dashboardType, analysisType, startDate, endDate);
-      setDashboardData(data);
+      
+      // If data is an array of transactions, normalize category_type
+      let normalizedData = data;
+      if (Array.isArray(data) && data.length > 0 && data[0].transaction_date) {
+        normalizedData = data.map(transaction => ({
+          ...transaction,
+          category_type: transaction.category ? transaction.category.category_type : transaction.category_type
+        }));
+      }
+      
+      setDashboardData(normalizedData);
     } catch (err) {
       setError(err.message);
     } finally {

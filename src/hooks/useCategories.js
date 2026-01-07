@@ -20,7 +20,12 @@ export const useCategories = (token) => {
       setLoading(true);
       setError(null);
       const data = await getCategories(token, page, perPage);
-      setCategories(data.categories);
+      // Normalize category types to lowercase
+      const normalizedCategories = data.categories.map(category => ({
+        ...category,
+        type: category.category_type ? category.category_type.toLowerCase() : 'expense'
+      }));
+      setCategories(normalizedCategories);
       setPagination(data.pagination);
     } catch (err) {
       setError(err.message);
@@ -34,7 +39,12 @@ export const useCategories = (token) => {
 
     try {
       const data = await getCategoriesForDropdown(token);
-      setDropdownCategories(data);
+      // Normalize category types to lowercase
+      const normalizedCategories = data.map(category => ({
+        ...category,
+        type: category.category_type ? category.category_type.toLowerCase() : 'expense'
+      }));
+      setDropdownCategories(normalizedCategories);
     } catch (err) {
       setError(err.message);
     }

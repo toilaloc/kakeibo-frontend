@@ -23,7 +23,12 @@ export const useTransactions = (token, userId) => {
       setLoading(true);
       setError(null);
       const data = await getTransactions(token, userId, page, perPage);
-      setTransactions(data.transactions);
+      // Normalize transactions to include category_type directly
+      const normalizedTransactions = data.transactions.map(transaction => ({
+        ...transaction,
+        category_type: transaction.category ? transaction.category.category_type : null
+      }));
+      setTransactions(normalizedTransactions);
       setPagination(data.pagination);
       setTotals(data.totals);
     } catch (err) {
