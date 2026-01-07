@@ -47,7 +47,7 @@ export const useTransactions = (token, userId) => {
       setError(err.message);
       throw err; // Re-throw for component handling
     }
-  }, [token, userId, fetchTransactions]);
+  }, [token, userId, fetchTransactions, pagination.current_page]);
 
   const editTransaction = useCallback(async (id, transactionData) => {
     try {
@@ -58,7 +58,7 @@ export const useTransactions = (token, userId) => {
       setError(err.message);
       throw err;
     }
-  }, [token, userId, fetchTransactions]);
+  }, [token, userId, fetchTransactions, pagination.current_page]);
 
   const removeTransaction = useCallback(async (id) => {
     try {

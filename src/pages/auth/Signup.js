@@ -19,7 +19,7 @@ function Signup() {
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [avatarError, setAvatarError] = useState('');
 
-  const { values, errors, touched, handleChange, setFieldValue, setFieldError, resetForm } = useFormValidation({
+  const { values, errors, touched, handleChange, setFieldError } = useFormValidation({
     display_name: '',
     first_name: '',
     last_name: '',
@@ -224,9 +224,7 @@ function Signup() {
     }
   };
 
-  const isFormValid = Object.keys(values).every(key =>
-    values[key] && !errors[key] && touched[key]
-  ) && values.password === values.password_confirmation;
+  
 
   return (
     <div className={styles.signupContainer}>

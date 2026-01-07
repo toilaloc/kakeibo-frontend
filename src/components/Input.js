@@ -21,8 +21,10 @@ const Input = ({
     <div className={`${styles.inputGroup} ${className}`}>
       {label && (
         <label htmlFor={inputId} className={styles.label}>
-          {label}
-          {required && <span className={styles.required}>*</span>}
+          <div className={styles.labelInner}>
+            <div className={styles.labelContent}>{label}</div>
+            {required && <span className={styles.required}>*</span>}
+          </div>
         </label>
       )}
       <input

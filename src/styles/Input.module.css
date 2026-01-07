@@ -11,6 +11,32 @@
   font-weight: 500;
 }
 
+/* Inner wrapper to align label content and required mark */
+.labelInner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.labelContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Prevent external block labels from forcing full width inside Input */
+.labelContent > * {
+  display: inline-flex !important;
+  width: auto !important;
+}
+
+/* Override common diary label wrapper when rendered inside Input */
+.labelContent > .labelWithCounter {
+  width: auto !important;
+}
+
 .required {
   color: #ef4444;
   margin-left: 4px;

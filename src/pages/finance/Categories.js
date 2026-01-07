@@ -181,7 +181,7 @@ function Categories() {
             <h3 className={styles.formTitle}>
               {editingId ? '✏️ Edit Category' : 
                 <>
-                  <img src="/nya-emoji/yossha-nya.gif" alt="Add" className={styles.buttonIcon} />
+                  <img src="/nya-emoji/lgtm-nya.gif" alt="Add" className={styles.buttonIcon} />
                   Add New Category
                 </>
               }
@@ -241,7 +241,7 @@ function Categories() {
                 >
                   {editingId ? '✏️ Update' : 
                     <>
-                      <img src="/nya-emoji/yossha-nya.gif" alt="Create" className={styles.buttonIcon} />
+                      <img src="/nya-emoji/lgtm-nya.gif" alt="Create" className={styles.buttonIcon} />
                       Create
                     </>
                   } Category

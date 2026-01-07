@@ -72,7 +72,7 @@ function Home() {
       <div className={styles.dashboardGrid}>
         <Link to="/categories" className={styles.dashboardCard}>
           <div className={styles.cardIcon}>
-            <img src="/nya-emoji/memo-nya.png" alt="Categories" className={styles.cardIconImage} />
+            <img src="/nya-emoji/think-nya.png" alt="Categories" className={styles.cardIconImage} />
           </div>
           <h3 className={styles.cardTitle}>Manage Categories</h3>
           <p className={styles.cardDescription}>
@@ -82,7 +82,7 @@ function Home() {
 
         <Link to="/transactions" className={styles.dashboardCard}>
           <div className={styles.cardIcon}>
-            <img src="/nya-emoji/medetai-nya.gif" alt="Transactions" className={styles.cardIconImage} />
+            <img src="/nya-emoji/gohan-nya.png" alt="Transactions" className={styles.cardIconImage} />
           </div>
           <h3 className={styles.cardTitle}>Track Transactions</h3>
           <p className={styles.cardDescription}>
@@ -92,7 +92,7 @@ function Home() {
 
         <Link to="/report" className={styles.dashboardCard}>
           <div className={styles.cardIcon}>
-            <img src="/nya-emoji/naruhodo-nya.gif" alt="Reports" className={styles.cardIconImage} />
+            <img src="/nya-emoji/benkyou-nya.png" alt="Reports" className={styles.cardIconImage} />
           </div>
           <h3 className={styles.cardTitle}>View Reports</h3>
           <p className={styles.cardDescription}>
@@ -102,11 +102,31 @@ function Home() {
 
         <div className={styles.dashboardCard}>
           <div className={styles.cardIcon}>
-            <img src="/nya-emoji/yossha-nya.gif" alt="Goals" className={styles.cardIconImage} />
+            <img src="/nya-emoji/seya-nya.png" alt="Goals" className={styles.cardIconImage} />
           </div>
           <h3 className={styles.cardTitle}>Set Goals</h3>
           <p className={styles.cardDescription}>
             Define your financial goals and track your progress towards achieving them.
+          </p>
+        </div>
+
+        <Link to="/diaries" className={styles.dashboardCard}>
+          <div className={styles.cardIcon}>
+            <img src="/nya-emoji/memo-nya.png" alt="Diary" className={styles.cardIconImage} />
+          </div>
+          <h3 className={styles.cardTitle}>Diary</h3>
+          <p className={styles.cardDescription}>
+            Reflect on your financial journey by maintaining a personal diary of your experiences.
+          </p>
+        </Link>
+
+        <div className={styles.dashboardCard}>
+          <div className={styles.cardIcon}>
+            <img src="/nya-emoji/naisho-nya.png" alt="Schedule" className={styles.cardIconImage} />
+          </div>
+          <h3 className={styles.cardTitle}>Schedule</h3>
+          <p className={styles.cardDescription}>
+            Plan your financial activities and reminders with the scheduling feature.
           </p>
         </div>
       </div>
